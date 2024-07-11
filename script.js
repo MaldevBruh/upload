@@ -1,59 +1,33 @@
-let display = document.getElementById('display');
-let currentOperand = '';
-let previousOperand = '';
-let operation = undefined;
+const signUpButton = document.getElementById('signUp');
+const signInButton = document.getElementById('signIn');
+const container = document.getElementById('container');
 
-function appendNumber(number) {
-    if (number === '0' && currentOperand === '0') return;
-    if (number === '.' && currentOperand.includes('.')) return;
-    currentOperand = currentOperand.toString() + number.toString();
-    updateDisplay();
-}
+signUpButton.addEventListener('click', () => {
+    container.classList.add("right-panel-active");
+});
 
-function chooseOperation(op) {
-    if (currentOperand === '') return;
-    if (previousOperand !== '') {
-        calculate();
+signInButton.addEventListener('click', () => {
+    container.classList.remove("right-panel-active");
+});
+
+document.getElementById('registerForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const name = document.getElementById('registerName').value;
+    const email = document.getElementById('registerEmail').value;
+    const password = document.getElementById('registerPassword').value;
+    localStorage.setItem('user', JSON.stringify({ name, email, password }));
+    alert('Registration successful!');
+});
+
+document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user && user.email === email && user.password === password) {
+        alert('Login successful!');
+        window.location.href = 'dashboard.html';
+    } else {
+        alert('Invalid email or password!');
     }
-    operation = op;
-    previousOperand = currentOperand;
-    currentOperand = '';
-}
-
-function calculate() {
-    let computation;
-    const prev = parseFloat(previousOperand);
-    const current = parseFloat(currentOperand);
-    if (isNaN(prev) || isNaN(current)) return;
-    switch (operation) {
-        case '+':
-            computation = prev + current;
-            break;
-        case '-':
-            computation = prev - current;
-            break;
-        case '*':
-            computation = prev * current;
-            break;
-        case '/':
-            computation = prev / current;
-            break;
-        default:
-            return;
-    }
-    currentOperand = computation;
-    operation = undefined;
-    previousOperand = '';
-    updateDisplay();
-}
-
-function clearDisplay() {
-    currentOperand = '';
-    previousOperand = '';
-    operation = undefined;
-    updateDisplay();
-}
-
-function updateDisplay() {
-    display.innerText = currentOperand || '0';
-}
+});

@@ -3,31 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalkulator</title>
+    <title>Login and Register</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="calculator">
-        <div class="display" id="display">0</div>
-        <div class="buttons">
-            <button class="btn" onclick="appendNumber('1')">1</button>
-            <button class="btn" onclick="appendNumber('2')">2</button>
-            <button class="btn" onclick="appendNumber('3')">3</button>
-            <button class="btn" onclick="chooseOperation('+')">+</button>
-            <button class="btn" onclick="appendNumber('4')">4</button>
-            <button class="btn" onclick="appendNumber('5')">5</button>
-            <button class="btn" onclick="appendNumber('6')">6</button>
-            <button class="btn" onclick="chooseOperation('-')">-</button>
-            <button class="btn" onclick="appendNumber('7')">7</button>
-            <button class="btn" onclick="appendNumber('8')">8</button>
-            <button class="btn" onclick="appendNumber('9')">9</button>
-            <button class="btn" onclick="chooseOperation('*')">*</button>
-            <button class="btn" onclick="appendNumber('0')">0</button>
-            <button class="btn" onclick="clearDisplay()">C</button>
-            <button class="btn" onclick="calculate()">=</button>
-            <button class="btn" onclick="chooseOperation('/')">/</button>
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <form id="registerForm">
+                <h1>Create Account</h1>
+                <input type="text" placeholder="Name" id="registerName" required />
+                <input type="email" placeholder="Email" id="registerEmail" required />
+                <input type="password" placeholder="Password" id="registerPassword" required />
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <form id="loginForm">
+                <h1>Sign In</h1>
+                <input type="email" placeholder="Email" id="loginEmail" required />
+                <input type="password" placeholder="Password" id="loginPassword" required />
+                <button type="submit">Sign In</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Welcome Back!</h1>
+                    <p>To keep connected with us please login with your personal info</p>
+                    <button class="ghost" id="signIn">Sign In</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Hello, Friend!</h1>
+                    <p>Enter your personal details and start your journey with us</p>
+                    <button class="ghost" id="signUp">Sign Up</button>
+                </div>
+            </div>
         </div>
     </div>
+    <footer>
+        <p>&copy; Simbey 1997-2024</p>
+    </footer>
     <script src="script.js"></script>
 </body>
 </html>

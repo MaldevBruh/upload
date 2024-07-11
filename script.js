@@ -1,0 +1,1 @@
+function a(a,b){return a+b};let b=prompt('Masukkan nama kamu:');alert(`Hai ${b}`);let c=parseInt(prompt('Masukkan angka pertama:'));let d=parseInt(prompt('Masukkan angka kedua:'));alert(`Hasilnya adalah: ${c+d}`)

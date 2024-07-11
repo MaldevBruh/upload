@@ -1,20 +1,59 @@
-function clearDisplay() {
-    document.getElementById('display').value = '';
+let display = document.getElementById('display');
+let currentOperand = '';
+let previousOperand = '';
+let operation = undefined;
+
+function appendNumber(number) {
+    if (number === '0' && currentOperand === '0') return;
+    if (number === '.' && currentOperand.includes('.')) return;
+    currentOperand = currentOperand.toString() + number.toString();
+    updateDisplay();
 }
 
-function appendToDisplay(value) {
-    document.getElementById('display').value += value;
+function chooseOperation(op) {
+    if (currentOperand === '') return;
+    if (previousOperand !== '') {
+        calculate();
+    }
+    operation = op;
+    previousOperand = currentOperand;
+    currentOperand = '';
 }
 
 function calculate() {
-    const display = document.getElementById('display');
-    try {
-        display.value = eval(display.value);
-    } catch (e) {
-        display.value = 'Error';
+    let computation;
+    const prev = parseFloat(previousOperand);
+    const current = parseFloat(currentOperand);
+    if (isNaN(prev) || isNaN(current)) return;
+    switch (operation) {
+        case '+':
+            computation = prev + current;
+            break;
+        case '-':
+            computation = prev - current;
+            break;
+        case '*':
+            computation = prev * current;
+            break;
+        case '/':
+            computation = prev / current;
+            break;
+        default:
+            return;
     }
+    currentOperand = computation;
+    operation = undefined;
+    previousOperand = '';
+    updateDisplay();
 }
 
-function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
+function clearDisplay() {
+    currentOperand = '';
+    previousOperand = '';
+    operation = undefined;
+    updateDisplay();
+}
+
+function updateDisplay() {
+    display.innerText = currentOperand || '0';
 }

@@ -19,10 +19,6 @@ This project provides a simple HTML form that allows users to upload images to [
 - **HTML Form**: The form is configured to send a POST request to `https://telegra.ph/upload` with the selected image.
 - **CSS Styling**: Provides basic styling for the form and page to ensure a clean and responsive design.
 
-## Example Screenshot
-
-![Example Screenshot](https://via.placeholder.com/800x600.png?text=Screenshot+Placeholder)
-
 > Note: The screenshot is a placeholder. You can replace it with an actual screenshot of the page.
 
 ## Contributing
@@ -35,4 +31,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
 
-For any questions or feedback, please contact [Your Name](mailto:your.email@example.com).
+For any questions or feedback, please contact [ME](mailto:@gmail.com).

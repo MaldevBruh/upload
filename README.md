@@ -19,8 +19,6 @@ This project provides a simple HTML form that allows users to upload images to [
 - **HTML Form**: The form is configured to send a POST request to `https://telegra.ph/upload` with the selected image.
 - **CSS Styling**: Provides basic styling for the form and page to ensure a clean and responsive design.
 
-> Note: The screenshot is a placeholder. You can replace it with an actual screenshot of the page.
-
 ## Contributing
 
 Feel free to submit issues or pull requests if you have suggestions or improvements for this project.

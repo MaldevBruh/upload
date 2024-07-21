@@ -3,46 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login and Register</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Media Uploader</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+        }
+        input[type="file"] {
+            margin: 10px 0;
+        }
+    </style>
 </head>
 <body>
-    <div class="container" id="container">
-        <div class="form-container sign-up-container">
-            <form id="registerForm">
-                <h1>Create Account</h1>
-                <input type="text" placeholder="Name" id="registerName" required />
-                <input type="email" placeholder="Email" id="registerEmail" required />
-                <input type="password" placeholder="Password" id="registerPassword" required />
-                <button type="submit">Sign Up</button>
-            </form>
-        </div>
-        <div class="form-container sign-in-container">
-            <form id="loginForm">
-                <h1>Sign In</h1>
-                <input type="email" placeholder="Email" id="loginEmail" required />
-                <input type="password" placeholder="Password" id="loginPassword" required />
-                <button type="submit">Sign In</button>
-            </form>
-        </div>
-        <div class="overlay-container">
-            <div class="overlay">
-                <div class="overlay-panel overlay-left">
-                    <h1>Welcome Back!</h1>
-                    <p>To keep connected with us please login with your personal info</p>
-                    <button class="ghost" id="signIn">Sign In</button>
-                </div>
-                <div class="overlay-panel overlay-right">
-                    <h1>Hello, Friend!</h1>
-                    <p>Enter your personal details and start your journey with us</p>
-                    <button class="ghost" id="signUp">Sign Up</button>
-                </div>
-            </div>
-        </div>
+    <div class="container">
+        <h1>Upload Media to Telegra.ph</h1>
+        <input type="file" id="fileInput" />
+        <button onclick="uploadFile()">Upload</button>
     </div>
-    <footer>
-        <p>&copy; Simbey 1997-2024</p>
-    </footer>
-    <script src="script.js"></script>
+    <script>
+        async function uploadFile() {
+            const input = document.getElementById('fileInput');
+            if (input.files.length === 0) {
+                alert('Please select a file.');
+                return;
+            }
+
+            const file = input.files[0];
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                const response = await fetch('https://api.telegra.ph/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                
+                if (result.error) {
+                    alert('Upload failed: ' + result.error);
+                } else {
+                    const pageUrl = `https://telegra.ph/${result.result.url}`;
+                    window.location.href = pageUrl;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while uploading the file.');
+            }
+        }
+    </script>
 </body>
 </html>
